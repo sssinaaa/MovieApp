@@ -8,7 +8,7 @@ import store from './src/store/store';
 const App = () => {
   return (
     <Provider store={store}>
-      <View>
+      <View style={{flex: 1}}>
         <HomeScreen />
       </View>
     </Provider>

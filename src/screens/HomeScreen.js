@@ -3,21 +3,36 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {fetchPopularMovies} from '../store/popularMovies/popularActions';
 
-const HomeScreen = ({popularMovieData, fetchPopularMovies}) => {
+const HomeScreen = ({data, fetchPopularMovies}) => {
   useEffect(() => {
     fetchPopularMovies();
   }, []);
 
+  console.log('popular movies: ', data);
+  const renderMovies = ({movies}) => {
+    return (
+      <View style={{flex: 1}}>
+        <Text>{movies}</Text>
+      </View>
+    );
+  };
+
   return (
-    <View>
-      <Text>Hello</Text>
+    <View style={{flex: 1}}>
+      {/* <FlatList data={data} renderItem={renderMovies} /> */}
+      <Text>Hi</Text>
+      {data.popularMovies.results.map(result => (
+        <View>
+          <Text>{result.overview}</Text>
+        </View>
+      ))}
     </View>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    popularMovieData: state.popularMovies,
+    data: state.popularMovies,
   };
 };
 
