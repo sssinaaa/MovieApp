@@ -48,7 +48,7 @@ const PopularMovies = () => {
 
   return (
     <View>
-      <Text style={styles.heading}>Popular</Text>
+      <Text style={styles.heading}>Popular Movies</Text>
       <FlatList
         data={popularMovies}
         renderItem={renderMovies}
