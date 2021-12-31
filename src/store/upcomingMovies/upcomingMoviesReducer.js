@@ -34,3 +34,5 @@ const upcomingMoviesReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export default upcomingMoviesReducer;
