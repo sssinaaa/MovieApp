@@ -1,47 +1,19 @@
 import React, {useEffect} from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import {connect} from 'react-redux';
-import {fetchPopularMovies} from '../store/popularMovies/popularActions';
+import {StyleSheet, Text, View} from 'react-native';
+import PopularMovies from '../components/movies/PopularMovies';
 
-const HomeScreen = ({data, fetchPopularMovies}) => {
-  useEffect(() => {
-    fetchPopularMovies();
-  }, []);
-
-  console.log('popular movies: ', data);
-  const renderMovies = ({movies}) => {
-    return (
-      <View style={{flex: 1}}>
-        <Text>{movies}</Text>
-      </View>
-    );
-  };
-
+const HomeScreen = () => {
   return (
-    <View style={{flex: 1}}>
-      {/* <FlatList data={data} renderItem={renderMovies} /> */}
-      <Text>Hi</Text>
-      {data.popularMovies.results.map(result => (
-        <View>
-          <Text>{result.overview}</Text>
-        </View>
-      ))}
+    <View style={styles.container}>
+      <PopularMovies />
     </View>
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    data: state.popularMovies,
-  };
-};
+export default HomeScreen;
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchPopularMovies: () => dispatch(fetchPopularMovies()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
-
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 50,
+  },
+});
