@@ -30,7 +30,7 @@ const PopularMovies = ({navigation}) => {
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('DetailScreen', {
-              id: movies.item.id,
+              movieId: movies.item.id,
             })
           }>
           <ImageBackground

@@ -11,13 +11,13 @@ import {
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchDetailScreen} from '../store/detailScreen/detailScreenActions';
 
-const DetailScreen = ({route, navigation}) => {
+const DetailScreen = ({route}) => {
   const details = useSelector(state => state.detailScreen.details);
   const dispatch = useDispatch();
-  const {id} = route.params;
+  const {movieId} = route.params;
 
   useEffect(() => {
-    dispatch(fetchDetailScreen(id));
+    dispatch(fetchDetailScreen(movieId));
   }, []);
 
   const budget = details.budget;
@@ -45,8 +45,8 @@ const DetailScreen = ({route, navigation}) => {
         <Text>{details.vote_average}</Text>
       </View>
       <View style={styles.genreContainer}>
-        {details.genres.map(genre => (
-          <View style={styles.genre}>
+        {details.genres.map((genre, idx) => (
+          <View key={idx} style={styles.genre}>
             <Text style={styles.genreText}>{genre.name}</Text>
           </View>
         ))}
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   },
   genreContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginHorizontal: 10,
     marginVertical: 10,
