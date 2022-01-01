@@ -8,14 +8,16 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchPopularMovies} from '../../store/popularMovies/popularActions';
 
-const PopularMovies = () => {
+const PopularMovies = ({navigation}) => {
   const popularMovies = useSelector(
     state => state.popularMovies.popularMovies.results,
   );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,11 +27,16 @@ const PopularMovies = () => {
   const renderMovies = movies => {
     return (
       <View style={{flex: 1, marginHorizontal: 10}}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('DetailScreen', {
+              id: movies.item.id,
+            })
+          }>
           <ImageBackground
             style={{width: 140, height: 235, borderRadius: 10}}
             source={{
-              uri: `https://image.tmdb.org/t/p/original/${movies.item.backdrop_path}`,
+              uri: `https://image.tmdb.org/t/p/original/${movies.item.poster_path}`,
             }}>
             <View style={styles.rateContainer}>
               <Text style={styles.rate}>{movies.item.vote_average}</Text>
@@ -47,7 +54,7 @@ const PopularMovies = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.heading}>Popular Movies</Text>
       <FlatList
         data={popularMovies}
@@ -62,7 +69,17 @@ const PopularMovies = () => {
 export default PopularMovies;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.46,
+    shadowRadius: 11.14,
+
+    elevation: 17,
+  },
   heading: {
     fontSize: 18,
     fontWeight: 'bold',
