@@ -11,16 +11,21 @@ export const movieApiSlice = createApi({
     //   return headers;
     // },
   }),
-  endpoints(builder) {
-    return {
-      fetchPopularMovies: builder.query({
-        query() {
-          return `movie/popular?api_key=${API_KEY}`;
-        },
-      }),
-    };
-  },
+  endpoints: builder => ({
+    fetchPopularMovies: builder.query({
+      query: () => `movie/popular?api_key=${API_KEY}`,
+    }),
+    fetchMovieCredits: builder.query({
+      query: id => `movie/${id}/credits?api_key=${API_KEY}`,
+    }),
+    fetchDetailScreen: builder.query({
+      query: id => `movie/${id}?api_key=${API_KEY}`,
+    }),
+  }),
 });
 
-export const {useFetchPopularMoviesQuery, useFetchMovieCreditsQuery} =
-  movieApiSlice;
+export const {
+  useFetchPopularMoviesQuery,
+  useFetchMovieCreditsQuery,
+  useFetchDetailScreenQuery,
+} = movieApiSlice;

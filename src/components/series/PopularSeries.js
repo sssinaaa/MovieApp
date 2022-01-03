@@ -5,16 +5,16 @@ import {useSelector, useDispatch} from 'react-redux';
 import {fetchPopularSeries} from '../../store/popularSeries/popularSeriesActions';
 
 const PopularSeries = () => {
-  const popularSeries = useSelector(
-    state => state.popularSeries.popularSeries.results,
-  );
-  const dispatch = useDispatch();
+  // const popularSeries = useSelector(
+  //   state => state.popularSeries.popularSeries.results,
+  // );
+  // const dispatch = useDispatch();
 
-  console.log('popular series: ', popularSeries);
+  // console.log('popular series: ', popularSeries);
 
-  useEffect(() => {
-    dispatch(fetchPopularSeries());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchPopularSeries());
+  // }, []);
 
   const renderSeries = series => (
     <View style={styles.listContainer}>
@@ -29,12 +29,12 @@ const PopularSeries = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Popular Series</Text>
-      <FlatList
+      {/* <FlatList
         data={popularSeries}
         renderItem={renderSeries}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-      />
+      /> */}
     </View>
   );
 };

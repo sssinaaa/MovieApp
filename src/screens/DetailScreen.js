@@ -11,14 +11,15 @@ import {
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchDetailScreen} from '../store/detailScreen/detailScreenActions';
 
-const DetailScreen = ({route}) => {
-  const details = useSelector(state => state.detailScreen.details);
-  const dispatch = useDispatch();
-  const {movieId} = route.params;
+import {useFetchDetailScreenQuery} from '../redux/features/movieApiSlice';
+import {useFetchMovieCreditsQuery} from '../redux/features/movieApiSlice';
 
-  useEffect(() => {
-    dispatch(fetchDetailScreen(movieId));
-  }, []);
+const DetailScreen = ({route}) => {
+  const {id} = route.params;
+
+  const movieDetails = useFetchDetailScreenQuery(id);
+  const movieCredits = useFetchMovieCreditsQuery(id);
+  const details = movieDetails.data;
 
   const budget = details.budget;
 

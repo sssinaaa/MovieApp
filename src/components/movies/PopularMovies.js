@@ -9,19 +9,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import {useSelector, useDispatch} from 'react-redux';
-import {fetchPopularMovies} from '../../store/popularMovies/popularActions';
+import {useFetchPopularMoviesQuery} from '../../redux/features/movieApiSlice';
 
 const PopularMovies = ({navigation}) => {
-  const popularMovies = useSelector(
-    state => state.popularMovies.popularMovies.results,
-  );
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchPopularMovies());
-  }, []);
+  const {data, error, isLoading} = useFetchPopularMoviesQuery();
 
   const renderMovies = movies => {
     return (
@@ -29,7 +20,7 @@ const PopularMovies = ({navigation}) => {
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('DetailScreen', {
-              movieId: movies.item.id,
+              id: movies.item.id,
             })
           }>
           <ImageBackground
@@ -52,11 +43,19 @@ const PopularMovies = ({navigation}) => {
     );
   };
 
+  if (isLoading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Popular Movies</Text>
       <FlatList
-        data={popularMovies}
+        data={data.results}
         renderItem={renderMovies}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
