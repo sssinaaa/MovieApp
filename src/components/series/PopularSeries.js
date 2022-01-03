@@ -4,7 +4,6 @@ import {useFetchPopularSeriesQuery} from '../../redux/features/seriesApiSlice';
 
 const PopularSeries = () => {
   const {data} = useFetchPopularSeriesQuery();
-  const popularSeries = data;
 
   const renderSeries = series => (
     <View style={styles.listContainer}>
@@ -19,12 +18,12 @@ const PopularSeries = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Popular Series</Text>
-      <FlatList
-        data={popularSeries.results}
+      {/* <FlatList
+        data={data.results}
         renderItem={renderSeries}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-      />
+      /> */}
     </View>
   );
 };

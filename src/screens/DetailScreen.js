@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   Image,
@@ -7,9 +7,6 @@ import {
   Text,
   View,
 } from 'react-native';
-
-import {useSelector, useDispatch} from 'react-redux';
-import {fetchDetailScreen} from '../store/detailScreen/detailScreenActions';
 
 import {useFetchDetailScreenQuery} from '../redux/features/movieApiSlice';
 import {useFetchMovieCreditsQuery} from '../redux/features/movieApiSlice';
@@ -31,6 +28,7 @@ const DetailScreen = ({route}) => {
 
   return (
     <View style={styles.container}>
+      <Text>hi</Text>
       <ImageBackground
         style={styles.backgroundImage}
         resizeMode="cover"
