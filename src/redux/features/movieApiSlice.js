@@ -21,6 +21,9 @@ export const movieApiSlice = createApi({
     fetchDetailScreen: builder.query({
       query: id => `movie/${id}?api_key=${API_KEY}`,
     }),
+    fetchUpcomingMovies: builder.query({
+      query: () => `movie/upcoming?api_key${API_KEY}`,
+    }),
   }),
 });
 
@@ -28,4 +31,5 @@ export const {
   useFetchPopularMoviesQuery,
   useFetchMovieCreditsQuery,
   useFetchDetailScreenQuery,
+  useFetchUpcomingMoviesQuery,
 } = movieApiSlice;
