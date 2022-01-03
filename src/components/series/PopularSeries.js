@@ -3,7 +3,7 @@ import {FlatList, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import {useFetchPopularSeriesQuery} from '../../redux/features/seriesApiSlice';
 
 const PopularSeries = () => {
-  const {data} = useFetchPopularSeriesQuery();
+  const {data, status} = useFetchPopularSeriesQuery();
 
   const renderSeries = series => (
     <View style={styles.listContainer}>
@@ -15,15 +15,19 @@ const PopularSeries = () => {
     </View>
   );
 
-  return (
+  return status === 'pending' ? (
+    <View style={{paddingTop: 100}}>
+      <Text>Loading</Text>
+    </View>
+  ) : (
     <View style={styles.container}>
       <Text style={styles.heading}>Popular Series</Text>
-      {/* <FlatList
+      <FlatList
         data={data.results}
         renderItem={renderSeries}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-      /> */}
+      />
     </View>
   );
 };

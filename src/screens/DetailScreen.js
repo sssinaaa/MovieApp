@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {
-  FlatList,
+  ScrollView,
   Image,
   ImageBackground,
   StyleSheet,
   Text,
   View,
+  FlatList,
 } from 'react-native';
 
 import {useFetchDetailScreenQuery} from '../redux/features/movieApiSlice';
@@ -14,21 +15,37 @@ import {useFetchMovieCreditsQuery} from '../redux/features/movieApiSlice';
 const DetailScreen = ({route}) => {
   const {id} = route.params;
 
-  const movieDetails = useFetchDetailScreenQuery(id);
-  const movieCredits = useFetchMovieCreditsQuery(id);
-  const details = movieDetails.data;
+  const {data: details, status} = useFetchDetailScreenQuery(id);
+  const {data: credits, status: creditStatus} = useFetchMovieCreditsQuery(id);
 
-  const budget = details.budget;
+  console.log('credits data: ', credits);
+  let displayBudget;
+  if (status === 'fulfilled') {
+    const budget = details.budget;
 
-  function numberWithSpaces(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    function numberWithSpaces(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    displayBudget = numberWithSpaces(budget);
   }
 
-  const displayBudget = numberWithSpaces(budget);
+  console.log('credits: ', credits);
 
-  return (
-    <View style={styles.container}>
-      <Text>hi</Text>
+  const renderCredits = credits => (
+    <View style={styles.castContainer}>
+      <Image
+        style={styles.castAvatar}
+        source={{
+          uri: `https://image.tmdb.org/t/p/original/${credits.item.profile_path}`,
+        }}
+      />
+      <Text style={styles.castName}>{credits.item.original_name}</Text>
+    </View>
+  );
+
+  return status == 'fulfilled' ? (
+    <ScrollView style={styles.container}>
       <ImageBackground
         style={styles.backgroundImage}
         resizeMode="cover"
@@ -56,6 +73,24 @@ const DetailScreen = ({route}) => {
       <View style={styles.overviewContainer}>
         <Text style={styles.overview}>{details.overview}</Text>
       </View>
+      <View style={{flex: 1}}>
+        {creditStatus === 'pending' ? (
+          <View>
+            <Text>Loading</Text>
+          </View>
+        ) : (
+          <FlatList
+            data={credits.cast}
+            renderItem={renderCredits}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          />
+        )}
+      </View>
+    </ScrollView>
+  ) : (
+    <View style={{paddingTop: 100}}>
+      <Text>Loading</Text>
     </View>
   );
 };
@@ -123,5 +158,17 @@ const styles = StyleSheet.create({
   },
   overview: {
     lineHeight: 20,
+  },
+  castContainer: {
+    marginVertical: 20,
+    paddingLeft: 10,
+  },
+  castAvatar: {
+    width: 150,
+    height: 250,
+  },
+  castName: {
+    textAlign: 'center',
+    padding: 10,
   },
 });
