@@ -8,7 +8,6 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchPopularMovies} from '../../store/popularMovies/popularActions';
