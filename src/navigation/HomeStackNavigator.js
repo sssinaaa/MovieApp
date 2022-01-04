@@ -1,7 +1,8 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
-import DetailScreen from '../screens/DetailScreen';
+import MovieDetailScreen from '../screens/MovieDetailScreen';
+import SeriesDetailScreen from '../screens/SeriesDetailScreen';
 
 const HomeStack = createNativeStackNavigator();
 
@@ -14,8 +15,13 @@ const HomeStackNavigator = () => {
         options={{headerShown: false}}
       />
       <HomeStack.Screen
-        name="DetailScreen"
-        component={DetailScreen}
+        name="MovieDetailScreen"
+        component={MovieDetailScreen}
+        options={{headerShown: false}}
+      />
+      <HomeStack.Screen
+        name="SeriesDetailScreen"
+        component={SeriesDetailScreen}
         options={{headerShown: false}}
       />
     </HomeStack.Navigator>

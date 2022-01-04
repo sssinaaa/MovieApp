@@ -12,7 +12,7 @@ export const seriesApiSlice = createApi({
       query: () => `tv/top_rated?api_key=${API_KEY}`,
     }),
     fetchDetailSeries: builder.query({
-      query: id => `tv/episode_group/${id}`,
+      query: id => `tv/${id}?api_key=${API_KEY}`,
     }),
   }),
 });

@@ -15,7 +15,7 @@ const PopularSeries = ({navigation}) => {
   const renderSeries = series => (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate('DetailScreen', {
+        navigation.navigate('SeriesDetailScreen', {
           seriesId: series.item.id,
         })
       }>

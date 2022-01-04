@@ -19,7 +19,7 @@ const PopularMovies = ({navigation}) => {
       <View style={{flex: 1, marginHorizontal: 10}}>
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate('DetailScreen', {
+            navigation.navigate('MovieDetailScreen', {
               id: movies.item.id,
             })
           }>

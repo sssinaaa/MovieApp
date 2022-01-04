@@ -1,96 +1,61 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
-  ScrollView,
-  Image,
-  ImageBackground,
   StyleSheet,
   Text,
   View,
-  FlatList,
+  ScrollView,
+  ImageBackground,
 } from 'react-native';
-
-import {useFetchDetailScreenQuery} from '../redux/features/movieApiSlice';
-import {useFetchMovieCreditsQuery} from '../redux/features/movieApiSlice';
 import {useFetchDetailSeriesQuery} from '../redux/features/seriesApiSlice';
 
-const DetailScreen = ({route}) => {
-  const {id, seriesId} = route.params;
+const SeriesDetailScreen = ({route}) => {
+  const {seriesId} = route.params;
 
-  const {data: details, status} = useFetchDetailScreenQuery(id);
-  const {data: credits, status: creditStatus} = useFetchMovieCreditsQuery(id);
-  const {data: seriesData, status: serieStatus} =
-    useFetchDetailScreenQuery(seriesId);
+  const {data: seriesDetails, status} = useFetchDetailSeriesQuery(seriesId);
 
-  console.log(useFetchDetailScreenQuery());
+  console.log(useFetchDetailSeriesQuery());
+  console.log(seriesId);
+  console.log('series details: ', seriesDetails);
 
-  console.log('series: ', seriesData);
-
-  let displayBudget;
-  if (status === 'fulfilled') {
-    const budget = details.budget;
-
-    function numberWithSpaces(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
-
-    displayBudget = numberWithSpaces(budget);
-  }
-
-  const renderCredits = credits => (
-    <View style={styles.castContainer}>
-      <Image
-        style={styles.castAvatar}
-        source={{
-          uri: `https://image.tmdb.org/t/p/original/${credits.item.profile_path}`,
-        }}
-      />
-      <Text style={styles.castName}>{credits.item.original_name}</Text>
-    </View>
-  );
-
-  return status == 'fulfilled' || serieStatus == 'fulfilled' ? (
+  return status == 'fulfilled' ? (
     <ScrollView style={styles.container}>
       <ImageBackground
         style={styles.backgroundImage}
         resizeMode="cover"
         source={{
-          uri: `https://image.tmdb.org/t/p/original/${details.backdrop_path}`,
+          uri: `https://image.tmdb.org/t/p/original/${seriesDetails.backdrop_path}`,
         }}>
         <View style={styles.imageDetailsContainer}>
-          <Text style={styles.title}>{details.original_title}</Text>
+          <Text style={styles.title}>{seriesDetails.original_title}</Text>
         </View>
       </ImageBackground>
       <View style={styles.infoContainer}>
-        <Text>{details.release_date.substr(0, 4)}</Text>
-        <Text>{details.vote_average}</Text>
+        <Text>{seriesDetails.vote_average}</Text>
       </View>
       <View style={styles.genreContainer}>
-        {details.genres.map((genre, idx) => (
+        {seriesDetails.genres.map((genre, idx) => (
           <View key={idx} style={styles.genre}>
             <Text style={styles.genreText}>{genre.name}</Text>
           </View>
         ))}
       </View>
-      <View style={styles.budget}>
-        <Text>{displayBudget}</Text>
-      </View>
       <View style={styles.overviewContainer}>
-        <Text style={styles.overview}>{details.overview}</Text>
+        <Text style={styles.overview}>{seriesDetails.overview}</Text>
       </View>
-      <View style={{flex: 1}}>
+      {/* <View style={{flex: 1}}>
         {creditStatus === 'pending' ? (
           <View>
             <Text>Loading</Text>
           </View>
         ) : (
           <FlatList
-            data={credits.cast}
+            data={movieCredits.cast}
             renderItem={renderCredits}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           />
         )}
-      </View>
+      </View> */}
     </ScrollView>
   ) : (
     <View style={{paddingTop: 100}}>
@@ -99,7 +64,7 @@ const DetailScreen = ({route}) => {
   );
 };
 
-export default DetailScreen;
+export default SeriesDetailScreen;
 
 const styles = StyleSheet.create({
   container: {
