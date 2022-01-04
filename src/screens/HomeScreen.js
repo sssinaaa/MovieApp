@@ -1,14 +1,16 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import MovieGenreList from '../components/MovieGenreList';
 import PopularMovies from '../components/movies/PopularMovies';
 import PopularSeries from '../components/series/PopularSeries';
 
 const HomeScreen = ({navigation}) => {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <PopularMovies navigation={navigation} />
       <PopularSeries navigation={navigation} />
-    </View>
+      <MovieGenreList />
+    </ScrollView>
   );
 };
 

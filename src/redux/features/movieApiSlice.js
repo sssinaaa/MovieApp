@@ -22,7 +22,11 @@ export const movieApiSlice = createApi({
       query: id => `movie/${id}?api_key=${API_KEY}`,
     }),
     fetchUpcomingMovies: builder.query({
-      query: () => `movie/upcoming?api_key${API_KEY}`,
+      query: () => `movie/upcoming?api_key=${API_KEY}`,
+    }),
+    fetchDiscoverMovies: builder.query({
+      query: id =>
+        `discover/movie?sort_by=popularity.desc&page=1&with_genres=${id}?&api_key=${API_KEY}`,
     }),
   }),
 });
@@ -32,4 +36,5 @@ export const {
   useFetchMovieCreditsQuery,
   useFetchDetailScreenQuery,
   useFetchUpcomingMoviesQuery,
+  useFetchDiscoverMoviesQuery,
 } = movieApiSlice;
