@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import MovieGenreList from '../components/MovieGenreList';
 import PopularMovies from '../components/movies/PopularMovies';
+import News from '../components/News';
 import PopularSeries from '../components/series/PopularSeries';
 
 const HomeScreen = ({navigation}) => {
@@ -10,6 +11,7 @@ const HomeScreen = ({navigation}) => {
       <PopularMovies navigation={navigation} />
       <PopularSeries navigation={navigation} />
       <MovieGenreList />
+      <News />
     </ScrollView>
   );
 };

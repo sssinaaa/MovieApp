@@ -28,6 +28,10 @@ export const movieApiSlice = createApi({
       query: id =>
         `discover/movie?sort_by=popularity.desc&page=1&with_genres=${id}?&api_key=${API_KEY}`,
     }),
+    fetchSearchMovies: builder.query({
+      query: search =>
+        `https://api.themoviedb.org/3/search/movie?query=${search}?&api_key=${API_KEY}`,
+    }),
   }),
 });
 
@@ -37,4 +41,5 @@ export const {
   useFetchDetailScreenQuery,
   useFetchUpcomingMoviesQuery,
   useFetchDiscoverMoviesQuery,
+  useFetchSearchMoviesQuery,
 } = movieApiSlice;
