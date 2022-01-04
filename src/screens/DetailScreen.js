@@ -11,14 +11,20 @@ import {
 
 import {useFetchDetailScreenQuery} from '../redux/features/movieApiSlice';
 import {useFetchMovieCreditsQuery} from '../redux/features/movieApiSlice';
+import {useFetchDetailSeriesQuery} from '../redux/features/seriesApiSlice';
 
 const DetailScreen = ({route}) => {
-  const {id} = route.params;
+  const {id, seriesId} = route.params;
 
   const {data: details, status} = useFetchDetailScreenQuery(id);
   const {data: credits, status: creditStatus} = useFetchMovieCreditsQuery(id);
+  const {data: seriesData, status: serieStatus} =
+    useFetchDetailScreenQuery(seriesId);
 
-  console.log('credits data: ', credits);
+  console.log(useFetchDetailScreenQuery());
+
+  console.log('series: ', seriesData);
+
   let displayBudget;
   if (status === 'fulfilled') {
     const budget = details.budget;
@@ -29,8 +35,6 @@ const DetailScreen = ({route}) => {
 
     displayBudget = numberWithSpaces(budget);
   }
-
-  console.log('credits: ', credits);
 
   const renderCredits = credits => (
     <View style={styles.castContainer}>
@@ -44,7 +48,7 @@ const DetailScreen = ({route}) => {
     </View>
   );
 
-  return status == 'fulfilled' ? (
+  return status == 'fulfilled' || serieStatus == 'fulfilled' ? (
     <ScrollView style={styles.container}>
       <ImageBackground
         style={styles.backgroundImage}

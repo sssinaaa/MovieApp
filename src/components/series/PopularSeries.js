@@ -1,18 +1,32 @@
 import React, {useEffect} from 'react';
-import {FlatList, ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import {useFetchPopularSeriesQuery} from '../../redux/features/seriesApiSlice';
 
-const PopularSeries = () => {
+const PopularSeries = ({navigation}) => {
   const {data, status} = useFetchPopularSeriesQuery();
 
   const renderSeries = series => (
-    <View style={styles.listContainer}>
-      <ImageBackground
-        style={styles.backgroundImage}
-        source={{
-          uri: `https://image.tmdb.org/t/p/original/${series.item.poster_path}`,
-        }}></ImageBackground>
-    </View>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('DetailScreen', {
+          seriesId: series.item.id,
+        })
+      }>
+      <View style={styles.listContainer}>
+        <ImageBackground
+          style={styles.backgroundImage}
+          source={{
+            uri: `https://image.tmdb.org/t/p/original/${series.item.poster_path}`,
+          }}></ImageBackground>
+      </View>
+    </TouchableOpacity>
   );
 
   return status === 'pending' ? (

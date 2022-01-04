@@ -11,7 +11,11 @@ export const seriesApiSlice = createApi({
     fetchPopularSeries: builder.query({
       query: () => `tv/top_rated?api_key=${API_KEY}`,
     }),
+    fetchDetailSeries: builder.query({
+      query: id => `tv/episode_group/${id}`,
+    }),
   }),
 });
 
-export const {useFetchPopularSeriesQuery} = seriesApiSlice;
+export const {useFetchPopularSeriesQuery, useFetchDetailSeriesQuery} =
+  seriesApiSlice;

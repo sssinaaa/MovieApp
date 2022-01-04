@@ -7,7 +7,7 @@ const HomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <PopularMovies navigation={navigation} />
-      <PopularSeries />
+      <PopularSeries navigation={navigation} />
     </View>
   );
 };
