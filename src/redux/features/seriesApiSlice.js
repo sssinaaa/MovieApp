@@ -14,8 +14,15 @@ export const seriesApiSlice = createApi({
     fetchDetailSeries: builder.query({
       query: id => `tv/${id}?api_key=${API_KEY}`,
     }),
+    fetchDiscoverSeries: builder.query({
+      query: id =>
+        `/discover/tv?sort_by=popularity.desc&with_genres=${id}?&api_key=${API_KEY}`,
+    }),
   }),
 });
 
-export const {useFetchPopularSeriesQuery, useFetchDetailSeriesQuery} =
-  seriesApiSlice;
+export const {
+  useFetchPopularSeriesQuery,
+  useFetchDetailSeriesQuery,
+  useFetchDiscoverSeriesQuery,
+} = seriesApiSlice;

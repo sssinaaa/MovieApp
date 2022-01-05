@@ -16,6 +16,7 @@ export const store = configureStore({
       movieApiSlice.middleware,
       seriesApiSlice.middleware,
       genreApiSlice.middleware,
+      newsApiSlice.middleware,
     );
   },
 });

@@ -10,7 +10,7 @@ export const newsApiSlice = createApi({
   endpoints: builder => ({
     fetchNews: builder.query({
       query: () =>
-        `?apikey=${API_KEY}&language=en&q=entertainment%20AND%20movies%20`,
+        `https://newsdata.io/api/1/news?apikey=${API_KEY}&language=en&category=entertainment&q=netflix`,
     }),
   }),
 });
