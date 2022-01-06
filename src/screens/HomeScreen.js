@@ -1,5 +1,12 @@
 import React, {useEffect} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import MovieGenreList from '../components/MovieGenreList';
 import PopularMovies from '../components/movies/PopularMovies';
 import News from '../components/News';
@@ -22,6 +29,5 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
   },
 });
