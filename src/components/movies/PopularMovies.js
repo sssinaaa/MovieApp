@@ -68,6 +68,7 @@ export default PopularMovies;
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 50,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
