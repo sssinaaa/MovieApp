@@ -8,6 +8,7 @@ import {
   Image,
   ScrollView,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import {useFetchSearchMoviesQuery} from '../redux/features/movieApiSlice';
 
@@ -15,8 +16,6 @@ const SearchScreen = () => {
   const [text, setText] = useState();
 
   const {data, status} = useFetchSearchMoviesQuery(text);
-  console.log(useFetchSearchMoviesQuery());
-  console.log('search output: ', data);
 
   const onChangeText = input => {
     setText(input);
@@ -55,6 +54,24 @@ const SearchScreen = () => {
           value={text}
           placeholder="Discover"
         />
+      </View>
+
+      <View style={styles.buttonsWrapper}>
+        <TouchableOpacity style={styles.button}>
+          <View style={styles.buttonView}>
+            <Text style={styles.buttonText}>TV Shows</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <View style={styles.buttonView}>
+            <Text style={styles.buttonText}>Movies</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <View style={styles.buttonView}>
+            <Text style={styles.buttonText}>People</Text>
+          </View>
+        </TouchableOpacity>
       </View>
       {text ? null : (
         <View style={styles.titleWrapper}>
@@ -109,5 +126,26 @@ const styles = StyleSheet.create({
   },
   resultsWrapper: {
     padding: 5,
+  },
+  buttonsWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginVertical: 20,
+  },
+  buttonView: {},
+  button: {
+    width: 100,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#000',
+    textAlign: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    textAlign: 'center',
+    justifyContent: 'center',
   },
 });
