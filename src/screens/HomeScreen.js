@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
+import {useScrollToTop} from '@react-navigation/native';
 import {
   SafeAreaView,
   ScrollView,
@@ -7,19 +8,23 @@ import {
   Text,
   View,
 } from 'react-native';
-import MovieGenreList from '../components/MovieGenreList';
+import MovieGenreList from '../components/movies/MovieGenreList';
 import PopularMovies from '../components/movies/PopularMovies';
-import News from '../components/News';
 import PopularSeries from '../components/series/PopularSeries';
-import SeriesGenreList from '../components/SeriesGenreList';
+import SeriesGenreList from '../components/series/SeriesGenreList';
+import Trending from '../components/Trending';
 
 const HomeScreen = ({navigation}) => {
+  const ref = useRef(null);
+  useScrollToTop(ref);
+
   return (
-    <ScrollView style={styles.container} alwaysBounceVertical={true}>
+    <ScrollView style={styles.container} alwaysBounceVertical={true} ref={ref}>
       <PopularMovies navigation={navigation} />
       <PopularSeries navigation={navigation} />
       <MovieGenreList />
       <SeriesGenreList />
+      <Trending navigation={navigation} />
     </ScrollView>
   );
 };

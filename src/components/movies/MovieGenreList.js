@@ -7,16 +7,27 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {useFetchDiscoverSeriesQuery} from '../redux/features/seriesApiSlice';
-import {useFetchSeriesGenreQuery} from '../redux/features/genreApiSlice';
+import {useFetchMovieGenreQuery} from '../../redux/features/genreApiSlice';
+import {useFetchDiscoverMoviesQuery} from '../../redux/features/movieApiSlice';
 
-const SeriesGenreList = () => {
+const MovieGenreList = () => {
   const [selected, setIsSelected] = useState(false);
-  const [index, setIndex] = useState(10759);
+  const [index, setIndex] = useState(28);
   const [genre, setGenre] = useState();
-  const {data, status} = useFetchSeriesGenreQuery();
-  const {data: discover, status: discoverStatus} =
-    useFetchDiscoverSeriesQuery(genre);
+  const {data, status} = useFetchMovieGenreQuery();
+  const {
+    data: discover,
+    status: discoverStatus,
+    refetch,
+  } = useFetchDiscoverMoviesQuery(genre);
+
+  // console.log('data: ', discover);
+
+  // console.log('query: ', useFetchDiscoverMoviesQuery(10752));
+
+  // console.log('genre', genre);
+
+  // console.log(index);
 
   const renderDiscover = discover => (
     <View style={styles.discoverResults}>
@@ -63,6 +74,7 @@ const SeriesGenreList = () => {
         <Text
           style={{
             color: genre.item.id === index ? '#fff' : '#000',
+            fontWeight: 'bold',
           }}>
           {genre.item.name}
         </Text>
@@ -72,7 +84,7 @@ const SeriesGenreList = () => {
 
   return status === 'fulfilled' ? (
     <View style={styles.container}>
-      <Text style={styles.heading}>Discover Series By Genre</Text>
+      <Text style={styles.heading}>Discover Movies By Genre</Text>
 
       <View style={styles.genreFlatlist}>
         <FlatList
@@ -91,7 +103,7 @@ const SeriesGenreList = () => {
   );
 };
 
-export default SeriesGenreList;
+export default MovieGenreList;
 
 const styles = StyleSheet.create({
   container: {
