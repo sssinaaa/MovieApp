@@ -47,8 +47,10 @@ const Trending = ({navigation}) => {
   };
 
   const renderTrends = trend => (
-    <TouchableOpacity onPress={() => navigateHandler(trend)}>
-      <View style={styles.trendsContainer}>
+    <TouchableOpacity
+      style={styles.trendsContainer}
+      onPress={() => navigateHandler(trend)}>
+      <View>
         <Image
           style={{width: 120, height: 200}}
           source={{
