@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,7 +10,11 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import {useFetchSearchMoviesQuery} from '../redux/features/movieApiSlice';
+import {
+  useFetchSearchMoviesQuery,
+  useFetchSearchPeopleQuery,
+  useFetchSearchSeriesQuery,
+} from '../redux/features/searchApiSlice';
 
 const SearchScreen = () => {
   const [text, setText] = useState();
@@ -56,23 +60,6 @@ const SearchScreen = () => {
         />
       </View>
 
-      <View style={styles.buttonsWrapper}>
-        <TouchableOpacity style={styles.button}>
-          <View style={styles.buttonView}>
-            <Text style={styles.buttonText}>TV Shows</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <View style={styles.buttonView}>
-            <Text style={styles.buttonText}>Movies</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <View style={styles.buttonView}>
-            <Text style={styles.buttonText}>People</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
       {text ? null : (
         <View style={styles.titleWrapper}>
           <Text>Search</Text>
@@ -147,5 +134,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     justifyContent: 'center',
+    fontWeight: 'bold',
   },
 });

@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+    flexWrap: 'wrap',
     marginHorizontal: 10,
     marginVertical: 10,
   },
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: '30%',
     padding: 5,
+    marginTop: 10,
   },
   genreText: {
     color: '#fff',
