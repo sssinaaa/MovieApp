@@ -52,7 +52,7 @@ const Trending = ({navigation}) => {
       onPress={() => navigateHandler(trend)}>
       <View>
         <Image
-          style={{width: 120, height: 200}}
+          style={{width: 120, height: 200, borderRadius: 20}}
           source={{
             uri: `https://image.tmdb.org/t/p/original/${trend.item.poster_path}`,
           }}
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     paddingLeft: 10,
+    color: '#fff',
   },
   trendsContainer: {
     flex: 1,
