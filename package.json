@@ -20,6 +20,7 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
     "react-native-vector-icons": "^9.0.0",
+    "react-native-virtualized-view": "^0.1.5",
     "react-navigation-stack": "^2.10.4",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
