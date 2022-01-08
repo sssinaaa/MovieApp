@@ -22,6 +22,7 @@ const PopularSeries = ({navigation}) => {
       <View style={styles.listContainer}>
         <ImageBackground
           style={styles.backgroundImage}
+          imageStyle={{borderRadius: 20}}
           source={{
             uri: `https://image.tmdb.org/t/p/original/${series.item.poster_path}`,
           }}></ImageBackground>
@@ -52,21 +53,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginVertical: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.46,
-    shadowRadius: 11.14,
-
-    elevation: 17,
   },
   heading: {
     fontSize: 18,
     fontWeight: 'bold',
     marginHorizontal: 10,
     marginVertical: 20,
+    color: '#fff',
   },
   listContainer: {
     paddingHorizontal: 10,

@@ -68,12 +68,12 @@ const MovieGenreList = () => {
         style={[
           styles.genreContainer,
           {
-            backgroundColor: genre.item.id === index ? '#000' : '#fff',
+            backgroundColor: genre.item.id === index ? 'gold' : '#fff',
           },
         ]}>
         <Text
           style={{
-            color: genre.item.id === index ? '#fff' : '#000',
+            color: '#000',
             fontWeight: 'bold',
           }}>
           {genre.item.name}
@@ -110,19 +110,11 @@ const styles = StyleSheet.create({
     flex: 1,
     marginVertical: 20,
     paddingLeft: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.39,
-    shadowRadius: 8.3,
-
-    elevation: 13,
   },
   heading: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: '#fff',
   },
   genreFlatlist: {
     marginVertical: 20,
@@ -136,6 +128,7 @@ const styles = StyleSheet.create({
   image: {
     width: 150,
     height: 235,
+    borderRadius: 20,
     marginRight: 20,
   },
   discoverResults: {},

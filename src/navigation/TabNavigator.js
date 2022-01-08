@@ -9,7 +9,12 @@ const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: '#000',
+        },
+      }}>
       <Tab.Screen
         name="Home"
         component={HomeStackNavigator}

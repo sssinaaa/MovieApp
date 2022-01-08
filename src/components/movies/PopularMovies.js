@@ -25,20 +25,11 @@ const PopularMovies = ({navigation}) => {
             })
           }>
           <ImageBackground
-            style={{width: 140, height: 235, borderRadius: 10}}
+            style={{width: 140, height: 235, borderRadius: 100}}
+            imageStyle={{borderRadius: 20}}
             source={{
               uri: `https://image.tmdb.org/t/p/original/${movies.item.poster_path}`,
-            }}>
-            <View style={styles.rateContainer}>
-              <Text style={styles.rate}>{movies.item.vote_average}</Text>
-            </View>
-            <View style={styles.imageTextContainer}>
-              <Text style={styles.imageText}>
-                {movies.item.release_date.substr(0, 4)}
-              </Text>
-              <Text style={styles.imageText}>{movies.item.original_title}</Text>
-            </View>
-          </ImageBackground>
+            }}></ImageBackground>
         </TouchableOpacity>
       </View>
     );
@@ -70,21 +61,13 @@ export default PopularMovies;
 const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.46,
-    shadowRadius: 11.14,
-
-    elevation: 17,
   },
   heading: {
     fontSize: 18,
     fontWeight: 'bold',
     marginHorizontal: 10,
     marginVertical: 20,
+    color: '#fff',
   },
   imageTextContainer: {
     flex: 1,

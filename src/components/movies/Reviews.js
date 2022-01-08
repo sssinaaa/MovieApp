@@ -13,9 +13,11 @@ const Reviews = ({id}) => {
   const {data: reviews, status: reviewStatus} = useFetchMoviesReviewsQuery(id);
 
   const renderReviews = review => {
-    let imagePath = review.item.author_details.avatar_path.substr(35);
+    let imagePath;
 
-    console.log('image path: ', imagePath);
+    // if (reviewStatus === 'fulfilled') {
+    //   imagePath = review.item.author_details.avatar_path.substr(35);
+    // }
 
     return (
       <View style={{flex: 1}}>
