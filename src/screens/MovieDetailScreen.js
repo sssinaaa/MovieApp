@@ -1,6 +1,4 @@
-import React, {useCallback, useMemo, useRef} from 'react';
-import BottomSheet from '@gorhom/bottom-sheet';
-
+import React from 'react';
 import {
   ScrollView,
   Image,
@@ -12,8 +10,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import {useFetchDetailScreenQuery} from '../redux/features/movieApiSlice';
-import {useFetchMovieCreditsQuery} from '../redux/features/movieApiSlice';
+import {
+  useFetchDetailScreenQuery,
+  useFetchMovieCreditsQuery,
+  useFetchMoviesReviewsQuery,
+} from '../redux/features/movieApiSlice';
+import Reviews from '../components/movies/Reviews';
 
 const MovieDetailScreen = ({route, navigation}) => {
   const {id} = route.params;
@@ -21,17 +23,6 @@ const MovieDetailScreen = ({route, navigation}) => {
   const {data: moviesData, status} = useFetchDetailScreenQuery(id);
   const {data: movieCredits, status: creditStatus} =
     useFetchMovieCreditsQuery(id);
-
-  // ref
-  const bottomSheetRef = useRef(null);
-
-  // variables
-  const snapPoints = useMemo(() => ['25%', '50%'], []);
-
-  // callbacks
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
 
   let displayBudget;
   if (status === 'fulfilled') {
@@ -106,15 +97,7 @@ const MovieDetailScreen = ({route, navigation}) => {
           />
         )}
       </View>
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={1}
-        snapPoints={snapPoints}
-        onChange={handleSheetChanges}>
-        <View style={styles.contentContainer}>
-          <Text>Awesome 🎉</Text>
-        </View>
-      </BottomSheet>
+      <Reviews id={id} />
     </ScrollView>
   ) : (
     <View style={{paddingTop: 100}}>
@@ -142,12 +125,13 @@ const styles = StyleSheet.create({
     shadowRadius: 7.49,
 
     elevation: 12,
+    justifyContent: 'flex-end',
   },
   imageDetailsContainer: {
-    flex: 1,
+    flex: 1 / 4,
     justifyContent: 'flex-end',
-    marginBottom: 15,
-    marginLeft: 10,
+    alignItems: 'flex-end',
+    backgroundColor: '#000',
   },
   title: {
     fontSize: 20,
