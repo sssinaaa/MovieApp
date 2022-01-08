@@ -83,8 +83,7 @@ const Trending = ({navigation}) => {
           // keyExtractor={item => item.id}
           ListFooterComponent={renderLoader}
           onEndReached={loadMoreItem}
-          // onEndReachedThreshold={0}
-          listMode="SCROLLVIEW"
+          onEndReachedThreshold={0}
         />
       </View>
     </View>

@@ -21,6 +21,7 @@ const PopularMovies = ({navigation}) => {
           onPress={() =>
             navigation.navigate('MovieDetailScreen', {
               id: movies.item.id,
+              navigation: navigation,
             })
           }>
           <ImageBackground

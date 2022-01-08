@@ -4,6 +4,7 @@ import {movieApiSlice} from '../features/movieApiSlice';
 import {seriesApiSlice} from '../features/seriesApiSlice';
 import {searchApiSlice} from '../features/searchApiSlice';
 import {newsApiSlice} from '../features/newsApiSlice';
+import {castApiSlice} from '../features/castApiSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     [genreApiSlice.reducerPath]: genreApiSlice.reducer,
     [searchApiSlice.reducerPath]: searchApiSlice.reducer,
     [newsApiSlice.reducerPath]: newsApiSlice.reducer,
+    [castApiSlice.reducerPath]: castApiSlice.reducer,
   },
   middleware: getDefaultMiddleware => {
     return getDefaultMiddleware().concat(
@@ -20,6 +22,7 @@ export const store = configureStore({
       genreApiSlice.middleware,
       newsApiSlice.middleware,
       searchApiSlice.middleware,
+      castApiSlice.middleware,
     );
   },
 });

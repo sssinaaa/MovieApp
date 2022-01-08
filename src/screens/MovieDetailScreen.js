@@ -7,12 +7,13 @@ import {
   Text,
   View,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 
 import {useFetchDetailScreenQuery} from '../redux/features/movieApiSlice';
 import {useFetchMovieCreditsQuery} from '../redux/features/movieApiSlice';
 
-const MovieDetailScreen = ({route}) => {
+const MovieDetailScreen = ({route, navigation}) => {
   const {id} = route.params;
 
   const {data: moviesData, status} = useFetchDetailScreenQuery(id);
@@ -33,15 +34,22 @@ const MovieDetailScreen = ({route}) => {
   }
 
   const renderCredits = credits => (
-    <View style={styles.castContainer}>
-      <Image
-        style={styles.castAvatar}
-        source={{
-          uri: `https://image.tmdb.org/t/p/original/${credits.item.profile_path}`,
-        }}
-      />
-      <Text style={styles.castName}>{credits.item.original_name}</Text>
-    </View>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('CastScreen', {
+          id: credits.item.id,
+        })
+      }>
+      <View style={styles.castContainer}>
+        <Image
+          style={styles.castAvatar}
+          source={{
+            uri: `https://image.tmdb.org/t/p/original/${credits.item.profile_path}`,
+          }}
+        />
+        <Text style={styles.castName}>{credits.item.original_name}</Text>
+      </View>
+    </TouchableOpacity>
   );
 
   return status == 'fulfilled' ? (

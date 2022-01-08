@@ -1,13 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import {useScrollToTop} from '@react-navigation/native';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {ScrollView} from 'react-native-virtualized-view';
 import MovieGenreList from '../components/movies/MovieGenreList';
 import PopularMovies from '../components/movies/PopularMovies';
 import PopularSeries from '../components/series/PopularSeries';
@@ -19,7 +13,7 @@ const HomeScreen = ({navigation}) => {
   useScrollToTop(ref);
 
   return (
-    <ScrollView style={styles.container} alwaysBounceVertical={true} ref={ref}>
+    <ScrollView style={styles.container} ref={ref}>
       <PopularMovies navigation={navigation} />
       <PopularSeries navigation={navigation} />
       <MovieGenreList />
