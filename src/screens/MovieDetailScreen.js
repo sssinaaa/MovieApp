@@ -122,9 +122,9 @@ const MovieDetailScreen = ({route, navigation}) => {
           </SafeAreaView>
         )}
       </View>
-      <SafeAreaView>
+      {/* <SafeAreaView>
         <Reviews id={id} />
-      </SafeAreaView>
+      </SafeAreaView> */}
     </ScrollView>
   ) : (
     <View style={{paddingTop: 100}}>

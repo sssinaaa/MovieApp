@@ -32,7 +32,7 @@ const Trending = ({navigation}) => {
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [page]);
 
   const navigateHandler = trend => {
     if (trend.item.media_type === 'movie') {

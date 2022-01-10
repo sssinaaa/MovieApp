@@ -14,7 +14,14 @@ export const castApiSlice = createApi({
     fetchPersonMovies: builder.query({
       query: id => `/person/${id}/movie_credits?&api_key=${API_KEY}`,
     }),
+    fetchPersonSeries: builder.query({
+      query: id => `/tv/${id}/credits?&api_key=${API_KEY}`,
+    }),
   }),
 });
 
-export const {useFetchPersonQuery, useFetchPersonMoviesQuery} = castApiSlice;
+export const {
+  useFetchPersonQuery,
+  useFetchPersonMoviesQuery,
+  useFetchPersonSeriesQuery,
+} = castApiSlice;

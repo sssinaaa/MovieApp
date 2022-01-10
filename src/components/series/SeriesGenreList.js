@@ -57,12 +57,12 @@ const SeriesGenreList = () => {
         style={[
           styles.genreContainer,
           {
-            backgroundColor: genre.item.id === index ? 'gold' : '#fff',
+            backgroundColor: genre.item.id === index ? 'gold' : '#e11b38',
           },
         ]}>
         <Text
           style={{
-            color: '#000',
+            color: genre.item.id === index ? '#000' : '#fff',
             fontWeight: 'bold',
           }}>
           {genre.item.name}
