@@ -7,7 +7,8 @@ export const movieApiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.themoviedb.org/3/',
     // prepareHeaders(headers) {
-    //   headers.set('api_key', API_KEY);
+    //   headers.set('Authorization', API_KEY);
+    //   headers.set('Content-Type', 'application/json;charset=utf-8');
     //   return headers;
     // },
   }),

@@ -111,7 +111,7 @@ const MovieDetailScreen = ({route, navigation}) => {
             <Text>Loading</Text>
           </View>
         ) : (
-          <SafeAreaView>
+          <SafeAreaView style={{flex: 1}}>
             <Text style={styles.castTitle}>Cast & Crew</Text>
             <FlatList
               data={movieCredits.cast}
@@ -122,9 +122,9 @@ const MovieDetailScreen = ({route, navigation}) => {
           </SafeAreaView>
         )}
       </View>
-      {/* <SafeAreaView>
+      {/* <View style={{flex: 1}}>
         <Reviews id={id} />
-      </SafeAreaView> */}
+      </View> */}
     </ScrollView>
   ) : (
     <View style={{paddingTop: 100}}>
@@ -221,12 +221,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   castContainer: {
+    alignItems: 'center',
     margin: 20,
   },
   castAvatar: {
     width: 100,
     height: 100,
     borderRadius: 50,
+    marginBottom: 5,
   },
   castName: {
     textAlign: 'center',

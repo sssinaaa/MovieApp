@@ -1,4 +1,6 @@
 import {useIsFocused} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import React from 'react';
 import {
   Image,
@@ -7,10 +9,20 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
 } from 'react-native';
+import {useAppDispatch} from '../redux/app/hooks';
+import {login} from '../redux/features/userSlice';
 
 const ProfileScreen = () => {
   const isFocused = useIsFocused();
+
+  const dispatch = useAppDispatch();
+
+  const onPress = async () => {
+    await AsyncStorage.removeItem('log');
+    dispatch(login(null));
+  };
 
   return (
     <View style={styles.container}>
@@ -29,6 +41,9 @@ const ProfileScreen = () => {
               }}
             />
           </View>
+          <TouchableOpacity onPress={onPress}>
+            <Text style={{color: '#fff'}}>Sign out</Text>
+          </TouchableOpacity>
         </View>
       </ImageBackground>
 
