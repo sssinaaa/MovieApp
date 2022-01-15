@@ -58,13 +58,39 @@ const MovieDetailScreen = ({route, navigation}) => {
     if (icon === 'hearto') {
       setIcon('heart');
       dispatch(addFav(id));
+      storeData(favState);
     } else if (icon === 'heart') {
       setIcon('hearto');
       dispatch(removeFav(id));
+      // storeData(favState);
     }
   };
 
-  useEffect(() => {}, []);
+  const storeData = async value => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      console.log('set: ', jsonValue);
+      await AsyncStorage.setItem('favorite', jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('favorite');
+      const value = JSON.parse(jsonValue);
+      console.log('get: ', value);
+      // return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+    // storeData();
+  }, [icon]);
 
   const renderCredits = credits => (
     <TouchableOpacity

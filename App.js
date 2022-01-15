@@ -9,7 +9,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SignupScreen from './src/screens/user/SignupScreen';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {login, signUp} from './src/redux/features/userSlice';
+import {addFav, login, signUp} from './src/redux/features/userSlice';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -26,6 +26,17 @@ const App = () => {
     }
   };
 
+  const getFavData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('favorite');
+      const favorites = JSON.parse(jsonValue);
+      console.log('get fav data:', jsonValue);
+      favorites.map(favorite => dispatch(addFav(favorite)));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const getFavorites = async () => {
     let arr = AsyncStorage.getItem('favorite');
     console.log('async data in user slice: ', arr);
@@ -33,7 +44,7 @@ const App = () => {
 
   useEffect(() => {
     getData();
-    getFavorites();
+    getFavData();
   }, []);
 
   return (

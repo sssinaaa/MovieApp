@@ -20,11 +20,10 @@ const userSlice = createSlice({
     },
     addFav(state, action) {
       state.favorites = [...state.favorites, action.payload];
-      console.log('favorites: ', state.favorites);
     },
     removeFav(state, action) {
-      state.favorites.forEach(index =>
-        index === action.payload ? state.favorites.pop() : state.favorites,
+      state.favorites = state.favorites.filter(
+        favorite => favorite !== action.payload,
       );
     },
   },
