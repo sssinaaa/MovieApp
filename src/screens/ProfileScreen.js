@@ -1,7 +1,7 @@
 import {useIsFocused} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Image,
   ImageBackground,
@@ -11,18 +11,34 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import {useAppDispatch} from '../redux/app/hooks';
-import {login} from '../redux/features/userSlice';
+import {useAppDispatch, useAppSelector} from '../redux/app/hooks';
+import {addFav, login} from '../redux/features/userSlice';
 
 const ProfileScreen = () => {
   const isFocused = useIsFocused();
 
+  const favo = useAppSelector(state => state.user.favorites);
+  console.log(favo);
   const dispatch = useAppDispatch();
 
   const onPress = async () => {
     await AsyncStorage.removeItem('log');
     dispatch(login(null));
   };
+
+  const getFavorites = async () => {
+    try {
+      const value = await AsyncStorage.getItem('favorite');
+      const favorites = JSON.parse(value);
+      dispatch(addFav(favorites));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getFavorites();
+  }, []);
 
   return (
     <View style={styles.container}>

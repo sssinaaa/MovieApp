@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   Image,
@@ -12,6 +12,7 @@ import {
   StatusBar,
 } from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import LinearGradient from 'react-native-linear-gradient';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -22,17 +23,24 @@ import {
   useFetchMoviesReviewsQuery,
 } from '../redux/features/movieApiSlice';
 import Reviews from '../components/movies/Reviews';
+import {useAppDispatch, useAppSelector} from '../redux/app/hooks';
+import {addFav, removeFav} from '../redux/features/userSlice';
 
 const MovieDetailScreen = ({route, navigation}) => {
+  const [icon, setIcon] = useState('hearto');
   const isFocused = useIsFocused();
+
+  const dispatch = useAppDispatch();
+
+  const favState = useAppSelector(state => state.user.favorites);
+
+  console.log('favstate: ', favState);
 
   const {id} = route.params;
 
   const {data: moviesData, status} = useFetchDetailScreenQuery(id);
   const {data: movieCredits, status: creditStatus} =
     useFetchMovieCreditsQuery(id);
-
-  console.log('movies data:', moviesData);
 
   let displayBudget;
   if (status === 'fulfilled') {
@@ -44,6 +52,19 @@ const MovieDetailScreen = ({route, navigation}) => {
 
     displayBudget = numberWithSpaces(budget);
   }
+
+  const toggleIcon = () => {
+    // icon === 'hearto' ? setIcon('heart') : setIcon('hearto');
+    if (icon === 'hearto') {
+      setIcon('heart');
+      dispatch(addFav(id));
+    } else if (icon === 'heart') {
+      setIcon('hearto');
+      dispatch(removeFav(id));
+    }
+  };
+
+  useEffect(() => {}, []);
 
   const renderCredits = credits => (
     <TouchableOpacity
@@ -77,6 +98,7 @@ const MovieDetailScreen = ({route, navigation}) => {
           colors={['transparent', 'black']}
           style={styles.imageDetailsContainer}>
           <Text style={styles.title}>{moviesData.original_title}</Text>
+
           <SafeAreaView style={styles.genreContainer}>
             {moviesData.genres.map((genre, idx) => (
               <SafeAreaView key={idx} style={styles.genre}>
@@ -95,8 +117,11 @@ const MovieDetailScreen = ({route, navigation}) => {
             <Text style={styles.rate}>{moviesData.vote_average}</Text>
           </View>
 
-          <View>
+          <View style={{alignItems: 'center'}}>
             <Text style={styles.runtime}>{moviesData.runtime}m</Text>
+            <TouchableOpacity onPress={() => toggleIcon()}>
+              <AntDesign name={icon} color="gold" size={20} />
+            </TouchableOpacity>
           </View>
         </LinearGradient>
       </ImageBackground>

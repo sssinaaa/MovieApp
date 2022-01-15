@@ -26,8 +26,14 @@ const App = () => {
     }
   };
 
+  const getFavorites = async () => {
+    let arr = AsyncStorage.getItem('favorite');
+    console.log('async data in user slice: ', arr);
+  };
+
   useEffect(() => {
     getData();
+    getFavorites();
   }, []);
 
   return (

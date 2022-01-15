@@ -24,7 +24,7 @@ const Trending = ({navigation}) => {
         `https://api.themoviedb.org/3/trending/all/week?page=${page}?&api_key=${API_KEY}`,
       )
       .then(response => {
-        console.log('page: ', response.data);
+        // console.log('page: ', response.data);
         setData([...data, ...response.data.results]);
       })
       .catch(error => console.log(error));
