@@ -28,6 +28,7 @@ import {addFav, removeFav} from '../redux/features/userSlice';
 
 const MovieDetailScreen = ({route, navigation}) => {
   const [icon, setIcon] = useState('hearto');
+  const [s, setS] = useState();
   const isFocused = useIsFocused();
 
   const dispatch = useAppDispatch();
@@ -58,17 +59,15 @@ const MovieDetailScreen = ({route, navigation}) => {
     if (icon === 'hearto') {
       setIcon('heart');
       dispatch(addFav(id));
-      storeData(favState);
     } else if (icon === 'heart') {
       setIcon('hearto');
       dispatch(removeFav(id));
-      // storeData(favState);
     }
   };
 
   const storeData = async value => {
     try {
-      const jsonValue = JSON.stringify(value);
+      const jsonValue = JSON.stringify(favState);
       console.log('set: ', jsonValue);
       await AsyncStorage.setItem('favorite', jsonValue);
     } catch (e) {
@@ -80,7 +79,12 @@ const MovieDetailScreen = ({route, navigation}) => {
     try {
       const jsonValue = await AsyncStorage.getItem('favorite');
       const value = JSON.parse(jsonValue);
-      console.log('get: ', value);
+      const favIndex = value.findIndex(val => val === id);
+      if (favIndex > -1) {
+        setIcon('heart');
+      } else {
+        setIcon('hearto');
+      }
       // return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch (e) {
       console.log(e);
@@ -89,7 +93,7 @@ const MovieDetailScreen = ({route, navigation}) => {
 
   useEffect(() => {
     getData();
-    // storeData();
+    storeData();
   }, [icon]);
 
   const renderCredits = credits => (
