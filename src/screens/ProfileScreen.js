@@ -18,7 +18,7 @@ const ProfileScreen = () => {
   const isFocused = useIsFocused();
 
   const favo = useAppSelector(state => state.user.favorites);
-  console.log(favo);
+  console.log('profile screen: ', favo);
   const dispatch = useAppDispatch();
 
   const onPress = async () => {
@@ -30,7 +30,7 @@ const ProfileScreen = () => {
     try {
       const value = await AsyncStorage.getItem('favorite');
       const favorites = JSON.parse(value);
-      dispatch(addFav(favorites));
+      console.log('favorites async: ', favorites);
     } catch (e) {
       console.log(e);
     }
@@ -73,7 +73,7 @@ const ProfileScreen = () => {
         <View style={styles.statsContainer}>
           <Text>Favorites</Text>
           <View style={styles.statsNumber}>
-            <Text>20</Text>
+            <Text>{favo.length}</Text>
           </View>
         </View>
         <View style={styles.statsContainer}>
@@ -83,6 +83,8 @@ const ProfileScreen = () => {
           </View>
         </View>
       </View>
+
+      <View></View>
     </View>
   );
 };
